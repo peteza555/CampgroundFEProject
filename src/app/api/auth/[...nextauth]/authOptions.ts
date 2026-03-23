@@ -35,6 +35,9 @@ export const authOptions: AuthOptions = {
     }),
   ],
   session: { strategy: "jwt" },
+  pages: {
+    signIn: '/login',   // ← กำหนดให้ใช้หน้า login ที่สร้างเอง
+  },
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };

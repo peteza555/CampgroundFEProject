@@ -6,8 +6,8 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
   if (!token) {
-    // Redirect unauthenticated users
-    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+    // Redirect unauthenticated users to custom login page
+    return NextResponse.redirect(new URL("/login", req.url));   // ← เปลี่ยนตรงนี้
   }
 
   // Access token properties: token.id, token.name, token.email, token.role

@@ -29,7 +29,7 @@ export default function TopMenu() {
               </>
             ) : (
               <>
-                <TopMenuItem title="Sign In" pageRef="/api/auth/signin" />
+                <TopMenuItem title="Sign In" pageRef="/login" />   {/* ← เปลี่ยนที่นี่ */}
                 <TopMenuItem title="Register" pageRef="/register" />
               </>
             )}
