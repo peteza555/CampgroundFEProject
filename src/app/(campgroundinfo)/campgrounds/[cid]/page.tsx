@@ -8,29 +8,33 @@ export default async function CampgroundDetailPage({ params }: { params: Promise
   const data = campground.data;
 
   return (
-    <main className="text-center p-5">
-      <h1 className="text-lg font-medium">{data.name}</h1>
-      <div className="flex flex-row my-5">
-        <Image
-          src={data.imageUrl || "/img/cover.jpg"}
-          alt="Campground Image"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="rounded-lg w-[30%]"
-        />
-        <div className="text-md mx-5 text-left">
-          <div>Name: {data.name}</div>
-          <div>Address: {data.address}</div>
-          <div>Telephone: {data.telephone}</div>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="md:flex">
+          <div className="md:w-1/2">
+            <Image
+              src={data.imageUrl || "/img/cover.jpg"}
+              alt={data.name}
+              width={800}
+              height={600}
+              className="w-full h-64 md:h-full object-cover"
+            />
+          </div>
+          <div className="p-6 md:w-1/2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{data.name}</h1>
+            <div className="space-y-2 text-gray-600">
+              <p><span className="font-semibold">Address:</span> {data.address}</p>
+              <p><span className="font-semibold">Telephone:</span> {data.telephone}</p>
+            </div>
+            <Link
+              href={`/booking?campgroundId=${data._id}`}
+              className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            >
+              Book this campground
+            </Link>
+          </div>
         </div>
       </div>
-      <Link
-        href={`/booking?campgroundId=${data._id}`}
-        className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Book this campground
-      </Link>
     </main>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "./card.module.css";
 import Image from "next/image";
 import InteractiveCard from "./InteractiveCard";
 
@@ -17,13 +16,13 @@ export default function Card({
 }) {
   return (
     <InteractiveCard>
-      <div className={styles.cardimg}>
-        <Image src={imgSrc} alt="Campground Picture" fill={true} objectFit="cover" />
+      <div className="relative h-48 w-full overflow-hidden rounded-t-lg bg-gray-200">
+        <Image src={imgSrc} alt={venueName} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
       </div>
-      <div className={styles.cardtext}>
-        <h3 className="text-xl font-semibold font-serif text-emerald-800">{venueName}</h3>
-        {address && <p className="text-sm text-gray-600">{address}</p>}
-        {telephone && <p className="text-sm text-gray-600">{telephone}</p>}
+      <div className="p-4">
+        <h3 className="text-xl font-semibold text-gray-800 line-clamp-1">{venueName}</h3>
+        {address && <p className="text-sm text-gray-500 mt-1 line-clamp-1">{address}</p>}
+        {telephone && <p className="text-sm text-gray-500 mt-1">{telephone}</p>}
       </div>
     </InteractiveCard>
   );

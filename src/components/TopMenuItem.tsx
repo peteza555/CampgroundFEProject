@@ -1,8 +1,11 @@
 import Link from "next/link";
 
-export default function TopMenuItem({ title, pageRef } : { title:string, pageRef:string }) {
+export default function TopMenuItem({ title, pageRef }: { title: string; pageRef: string }) {
   return (
-    <Link className="w-[120px] mx-8 h-[100%] flex items-center justify-center text-center font-sans text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-200" href={pageRef}>
+    <Link
+      href={pageRef}
+      className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md transition"
+    >
       {title}
     </Link>
   );

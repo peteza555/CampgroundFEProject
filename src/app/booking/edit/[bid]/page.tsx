@@ -58,20 +58,25 @@ export default function EditBookingPage() {
     }
   };
 
-  if (status === "loading" || !booking) return <div>Loading...</div>;
+  if (status === "loading" || !booking) return <div className="text-center py-12">Loading...</div>;
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center">Edit Booking</h1>
-        <p className="mb-4">Campground: {booking.campground.name}</p>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <DateReserve value={bookingDate} onChange={setBookingDate} />
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">Edit Booking</h1>
+        <p className="mb-4 text-center text-gray-600">
+          Campground: <span className="font-medium">{booking.campground.name}</span>
+        </p>
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Booking Date</label>
+            <DateReserve value={bookingDate} onChange={setBookingDate} />
+          </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition"
           >
             {loading ? "Updating..." : "Update Booking"}
           </button>

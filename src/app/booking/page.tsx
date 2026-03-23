@@ -19,19 +19,6 @@ export default function BookingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const fetchCampgrounds = async () => {
-  try {
-    console.log('Fetching campgrounds from API...');
-    const res = await getCampgrounds();
-    console.log('Campgrounds data:', res);
-    setCampgrounds(res.data);
-    if (!campgroundId && res.data.length > 0) setSelectedCampground(res.data[0]._id);
-  } catch (err: any) {
-    console.error('Error fetching campgrounds:', err);
-    setError(`Failed to load campgrounds: ${err.message}`);
-  }
-};
-
   useEffect(() => {
     if (status === "unauthenticated") router.push("/api/auth/signin");
   }, [status, router]);
@@ -67,32 +54,36 @@ export default function BookingPage() {
     }
   };
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <div className="text-center py-12">Loading...</div>;
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center">Create Booking</h1>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <select
-            value={selectedCampground}
-            onChange={(e) => setSelectedCampground(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          >
-            <option value="">Select a campground</option>
-            {campgrounds.map((c) => (
-              <option key={c._id} value={c._id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          <DateReserve value={bookingDate} onChange={setBookingDate} />
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">Create Booking</h1>
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Campground</label>
+            <select
+              value={selectedCampground}
+              onChange={(e) => setSelectedCampground(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              required
+            >
+              <option value="">Select a campground</option>
+              {campgrounds.map((c) => (
+                <option key={c._id} value={c._id}>{c.name}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Booking Date</label>
+            <DateReserve value={bookingDate} onChange={setBookingDate} />
+          </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition"
           >
             {loading ? "Booking..." : "Book Now"}
           </button>

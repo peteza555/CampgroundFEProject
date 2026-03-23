@@ -13,7 +13,6 @@ export default function MyBookingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // ตรวจสอบว่าเป็น admin หรือไม่ (สมมติ role = "admin")
   const isAdmin = session?.user?.role === "admin";
 
   const fetchBookings = async () => {
@@ -65,9 +64,9 @@ export default function MyBookingPage() {
                 <p>Date: {new Date(booking.bookingDate).toLocaleDateString()}</p>
                 <p>Address: {booking.campground.address}</p>
                 <p>Tel: {booking.campground.telephone}</p>
-                {isAdmin && (
+                {isAdmin && booking.user && (
                   <p className="mt-2 text-sm text-gray-600">
-                    User: {booking.user || "Unknown"}
+                    User: {booking.user}
                   </p>
                 )}
               </div>

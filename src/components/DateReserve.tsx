@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -12,10 +12,15 @@ type DateReserveProps = {
 
 export default function DateReserve({ value, onChange }: DateReserveProps) {
   return (
-    <div className="bg-slate-100 rounded-lg w-fit px-10 py-5 flex flex-row justify-center gap-5">
+    <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker className="bg-white" value={value} onChange={onChange} />
+        <DatePicker
+          className="w-full"
+          value={value}
+          onChange={onChange}
+          slotProps={{ textField: { fullWidth: true, variant: "outlined", size: "small" } }}
+        />
       </LocalizationProvider>
     </div>
-  ); 
+  );
 }

@@ -3,16 +3,16 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Banner />
-      <div className="text-center my-8">
+      <div className="text-center py-12">
         <Link
           href="/campgrounds"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
         >
           Browse Campgrounds
         </Link>
       </div>
-    </main>
+    </>
   );
 }
