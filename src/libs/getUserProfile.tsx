@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.BACKEND_URL;
 
 export default async function getUserProfile(token: string) {
   const response = await fetch(`${process.env.BACKEND_URL}/auth/me`, {

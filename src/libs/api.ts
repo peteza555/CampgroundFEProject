@@ -1,7 +1,7 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.BACKEND_URL;
 
 if (!API_URL) {
-  console.error('NEXT_PUBLIC_API_URL is not defined');
+  console.error('BACKEND_URL is not defined');
 }
 
 export async function fetchWithAuth(url: string, token: string, options?: RequestInit) {
