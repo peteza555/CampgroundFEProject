@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VenueFinder - Find Your Perfect Event Venue",
+  title: "CampFinder - Find Your Perfect Event Venue",
   description: "Book campgrounds and venues for your events easily.",
 };
 

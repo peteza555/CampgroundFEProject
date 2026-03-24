@@ -15,7 +15,7 @@ export default function TopMenu() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between h-auto sm:h-16 py-3 sm:py-0">
           <div className="flex items-center justify-between">
-            <TopMenuItem title="VenueFinder" pageRef="/" />
+            <TopMenuItem title="CampFinder" pageRef="/" />
           </div>
           <nav className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:gap-1">
             <TopMenuItem title="Home" pageRef="/" />
