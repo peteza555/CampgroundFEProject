@@ -3,8 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TopMenu from "@/components/TopMenu";
 import NextAuthProvider from "@/providers/NextAuthProvider";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 const geistSans = Geist({
@@ -22,17 +20,16 @@ export const metadata: Metadata = {
   description: "Book campgrounds and venues for your events easily.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className="bg-gray-50">
         <AppRouterCacheProvider>
-          <NextAuthProvider session={session}>
+          <NextAuthProvider>
             <TopMenu />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {children}
