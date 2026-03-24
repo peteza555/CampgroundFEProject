@@ -1,10 +1,12 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import TopMenuItem from "./TopMenuItem";
 
 export default function TopMenu() {
   const { data: session } = useSession();
+  const router = useRouter();
   const isAdmin = session?.user?.role === "admin";
   const bookingTitle = isAdmin ? "All Booking" : "My Booking";
 
@@ -20,7 +22,7 @@ export default function TopMenu() {
             {session ? (
               <>
                 <button
-                  onClick={() => signOut()}
+                  onClick={() => router.push("/signout")}
                   className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md transition"
                 >
                   Sign Out

@@ -50,10 +50,15 @@ export async function getBookings(token: string) {
   return res.json();
 }
 
-export async function updateBooking(bookingId: string, bookingDate: string, token: string) {
+export async function updateBooking(
+  bookingId: string,
+  campgroundId: string,
+  bookingDate: string,
+  token: string
+) {
   const res = await fetchWithAuth(`${API_URL}/bookings/${bookingId}`, token, {
     method: 'PUT',
-    body: JSON.stringify({ bookingDate }),
+    body: JSON.stringify({ campground: campgroundId, bookingDate }),
   });
   if (!res.ok) throw new Error('Failed to update booking');
   return res.json();

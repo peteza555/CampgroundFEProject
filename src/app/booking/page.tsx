@@ -6,6 +6,22 @@ import { useSession } from "next-auth/react";
 import DateReserve from "@/components/DateReserve";
 import { getCampgrounds, createBooking } from "@/libs/api";
 import dayjs, { Dayjs } from "dayjs";
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 
 export default function BookingPage() {
   const router = useRouter();
@@ -36,7 +52,7 @@ export default function BookingPage() {
     fetchCampgrounds();
   }, [campgroundId]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!selectedCampground || !bookingDate) {
       setError("Please select campground and date");
@@ -54,41 +70,48 @@ export default function BookingPage() {
     }
   };
 
-  if (status === "loading") return <div className="text-center py-12">Loading...</div>;
+  if (status === "loading")
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
+        <CircularProgress />
+      </Box>
+    );
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
-        <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">Create Booking</h1>
-        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Campground</label>
-            <select
-              value={selectedCampground}
-              onChange={(e) => setSelectedCampground(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              required
-            >
-              <option value="">Select a campground</option>
-              {campgrounds.map((c) => (
-                <option key={c._id} value={c._id}>{c.name}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Booking Date</label>
-            <DateReserve value={bookingDate} onChange={setBookingDate} />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition"
-          >
-            {loading ? "Booking..." : "Book Now"}
-          </button>
-        </form>
-      </div>
-    </main>
+    <Container maxWidth="sm" sx={{ py: 6 }}>
+      <Card>
+        <CardHeader title="Create Booking" subheader="Reserve your next stay" />
+        <CardContent>
+          <Stack spacing={3} component="form" onSubmit={handleSubmit}>
+            {error && <Alert severity="error">{error}</Alert>}
+            <FormControl fullWidth required>
+              <InputLabel id="campground-label">Campground</InputLabel>
+              <Select
+                labelId="campground-label"
+                label="Campground"
+                value={selectedCampground}
+                onChange={(e) => setSelectedCampground(e.target.value)}
+              >
+                <MenuItem value="">Select a campground</MenuItem>
+                {campgrounds.map((c) => (
+                  <MenuItem key={c._id} value={c._id}>
+                    {c.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Box>
+              <Typography variant="subtitle2" gutterBottom>
+                Booking Date
+              </Typography>
+              <DateReserve value={bookingDate} onChange={setBookingDate} />
+            </Box>
+            <Button type="submit" variant="contained" size="large" disabled={loading}>
+              {loading ? "Booking..." : "Book Now"}
+            </Button>
+          </Stack>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
